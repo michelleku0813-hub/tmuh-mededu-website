@@ -1,5 +1,6 @@
 import type { Lang } from '@/i18n';
 import { pick } from '@/i18n';
+import { formatPhoneExt } from '@/utils/phone';
 
 export const EBM_COLORS = {
   ink: '#26303B',
@@ -119,7 +120,7 @@ export function buildEbm(lang: Lang) {
     closingTitle: pick(lang, '讓實證成為每一次臨床決策的基石', 'Making evidence the foundation of every clinical decision'),
     closingBody: pick(lang, '教學部實證醫學中心歷經二十餘年耕耘，已在本院建立起完整的實證醫學推動體系。從教育培訓、競賽參與到品質改善，持續為病患提供最佳照護品質。', 'Over two decades the Center has built a complete EBM system — from training and contests to quality improvement — continually striving to deliver the best care for patients.'),
     contactPerson: pick(lang, '行政專員：江明憲', 'Administrator: Ming-Hsien Chiang'),
-    contactExt: pick(lang, '分機 3760', 'Ext. 3760'),
+    contactExt: formatPhoneExt('3760', lang),
     contactPlace: pick(lang, '臺北醫學大學附設醫院 · 教學部 實證醫學中心', 'TMU Hospital · EBM Center, Dept. of Medical Education'),
     contactQuote: pick(lang, '以實證深耕醫療品質，讓最佳證據走進每一個臨床現場。', 'Deepening care quality through evidence — the best evidence at every bedside.'),
     kpis,

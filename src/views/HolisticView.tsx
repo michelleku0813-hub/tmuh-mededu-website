@@ -12,6 +12,7 @@ import {
   holisticKpis,
 } from '@/data/holistic';
 import { buildActivities, buildAnnouncements, latestUpdate } from '@/data/news';
+import { formatPhoneExt } from '@/utils/phone';
 import { Icon, type IconName } from '@/components/common/Icon';
 import { Reveal } from '@/components/common/Reveal';
 import { Eyebrow } from '@/components/common/Eyebrow';
@@ -585,7 +586,7 @@ export function HolisticView() {
                 </span>
                 <div>
                   <div style={{ fontFamily: "'Noto Sans TC', sans-serif", fontWeight: 600, fontSize: 14.5, color: 'var(--text)' }}>{t.hContactPerson}</div>
-                  <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 13, color: 'var(--muted)' }}>{t.hContactExt}</div>
+                  <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 13, color: 'var(--muted)' }}>{formatPhoneExt('3760', lang)}</div>
                 </div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>

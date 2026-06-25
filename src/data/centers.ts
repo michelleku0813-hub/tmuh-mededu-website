@@ -15,6 +15,7 @@ export interface Center {
   introEn: string;
   contactZh: string;
   contactEn: string;
+  /** Extension number only (formatted at display time). */
   ext: string;
   deep?: boolean;
   people: RawPerson[];
@@ -46,7 +47,7 @@ export const CENTERS: Center[] = [
       'Hospital-wide clinical faculty development and support for academic appointments, strengthening teaching quality and professional growth.',
     contactZh: '陳均茹',
     contactEn: 'Chun-Ju Chen',
-    ext: '分機 3757',
+    ext: '3757',
     people: [
       person('陳明德', 'Ming-De Chen', 'director', '西醫 · 副教授', 'Physician · Assoc. Prof.', 'ming-de-chen', 'ming-de-chen'),
       person('陳淑美', 'Shu-Mei Chen', 'deputy', '西醫 · 副教授', 'Physician · Assoc. Prof.', 'shumei-chen', 'shumei-chen'),
@@ -68,7 +69,7 @@ export const CENTERS: Center[] = [
       'Designing and running OSCE and simulation-based training to build solid clinical skills.',
     contactZh: '張家銘、賴哲民',
     contactEn: 'Chia-Ming Chang · Che-Min Lai',
-    ext: '分機 3770',
+    ext: '3770',
     people: [
       person('吳人傑', 'Jen-Chieh Wu', 'director', '西醫 · 助理教授', 'Physician · Asst. Prof.', 'jen-chieh-wu', 'jen-chieh-wu'),
       person('蔡鴻維', 'Hung-Wei Tsai', 'deputy', '西醫 · 講師', 'Physician · Lecturer', 'hung-wei-tsai', 'hung-wei-tsai'),
@@ -91,7 +92,7 @@ export const CENTERS: Center[] = [
       'Advancing Evidence-Based Medicine, embedding evidence into care quality and clinical decisions.',
     contactZh: '江明憲',
     contactEn: 'Ming-Hsien Chiang',
-    ext: '分機 3760',
+    ext: '3760',
     people: [
       person('林秀真', 'Hsiu-Chen Lin', 'director', '西醫 · 副教授', 'Physician · Assoc. Prof.', 'hsiu-chen-lin', 'hsiu-chen-lin'),
       person('林聖峰', 'Sheng-Feng Lin', 'deputy', '西醫 · 副教授', 'Physician · Assoc. Prof.', 'sheng-feng-lin', 'sheng-feng-lin'),
@@ -113,7 +114,7 @@ export const CENTERS: Center[] = [
       'People first — caring for the whole person. Uniting medical, psychological and compassionate care to promote Mental Health First Aid.',
     contactZh: '江明憲',
     contactEn: 'Ming-Hsien Chiang',
-    ext: '分機 3760',
+    ext: '3760',
     deep: true,
     people: [
       person('廖若帆', 'Faith Ruofan Liao', 'director', '護理 · 副教授', 'Nursing · Assoc. Prof.', 'faith-ruofan-liao', 'faith-ruofan-liao'),

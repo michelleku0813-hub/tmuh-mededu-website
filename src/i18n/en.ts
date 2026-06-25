@@ -75,7 +75,7 @@ export const en: Strings = {
   aiBody:
     'Centered on building an AI holistic-care education ecosystem, this scope connects holistic care education, AI expertise, medical-education research and real practice settings — developing AI-assisted teaching resources, case materials and assessment feedback for clinical and campus use, deepening empathy, communication and whole-person care.',
   hContactPerson: 'Administrator: Ming-Hsien Chiang',
-  hContactExt: 'Ext. 3760',
+  hContactExt: '(02) 2737-2181 ext. 3760',
   hContactPlace:
     'TMU Hospital · Holistic Care Education Center, Dept. of Medical Education',
   hContactQuote:

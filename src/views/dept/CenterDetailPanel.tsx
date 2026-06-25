@@ -3,6 +3,7 @@ import { type Center, CENTER_ICON } from '@/data/centers';
 import { resolvePerson, type RoleKey } from '@/data/people';
 import { Icon, type IconName } from '@/components/common/Icon';
 import { PersonCard } from '@/components/common/PersonCard';
+import { formatPhoneExt } from '@/utils/phone';
 
 interface Props {
   center: Center;
@@ -34,7 +35,7 @@ export function CenterDetailPanel({ center, onClose }: Props) {
   const people = center.people.map((p) => resolvePerson(p, center.color, lang));
   const isAdmin = center.id === 'admin';
   const contactLine = center.ext
-    ? `${isZh ? center.contactZh : center.contactEn} · ${center.ext}`
+    ? `${isZh ? center.contactZh : center.contactEn} · ${formatPhoneExt(center.ext, lang)}`
     : '';
 
   const byRole = (role: RoleKey) =>

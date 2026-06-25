@@ -13,6 +13,7 @@ import { Reveal } from '@/components/common/Reveal';
 import { Eyebrow } from '@/components/common/Eyebrow';
 import { KpiCard } from '@/components/common/KpiCard';
 import { SectionHeading } from '@/components/common/SectionHeading';
+import { formatPhoneExt } from '@/utils/phone';
 import { HeroImage } from '@/components/common/HeroImage';
 import { OrgChart } from './dept/OrgChart';
 import { CenterDetailPanel } from './dept/CenterDetailPanel';
@@ -98,7 +99,7 @@ function CenterLinks() {
 }
 
 export function DeptView() {
-  const { t, isZh } = useSite();
+  const { t, isZh, lang } = useSite();
   const [orgVariant, setOrgVariant] = useState<'A' | 'B'>('A');
   const [active, setActive] = useState<CenterId | null>('admin');
   const kpis = deptKpis(isZh ? 'zh' : 'en');
@@ -108,13 +109,13 @@ export function DeptView() {
     {
       center: isZh ? '教學部' : 'Dept. of Medical Education',
       person: isZh ? '王怡文' : 'Yi-Wen Wang',
-      ext: isZh ? '分機 3752' : 'Ext. 3752',
+      ext: formatPhoneExt('3752', lang),
       color: '#4f8c7d',
     },
     ...CENTERS.filter((c) => c.ext).map((c) => ({
       center: isZh ? c.zh : c.en,
       person: isZh ? c.contactZh : c.contactEn,
-      ext: c.ext,
+      ext: formatPhoneExt(c.ext, lang),
       color: c.color,
     })),
   ];

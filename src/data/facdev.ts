@@ -1,6 +1,7 @@
 import { person, type RawPerson } from './people';
 import type { Lang } from '@/i18n';
 import { pick } from '@/i18n';
+import { formatPhoneExt } from '@/utils/phone';
 
 export const FD_COLORS = {
   ink: '#3A2E25',
@@ -86,7 +87,7 @@ export function buildFacdev(lang: Lang) {
     closingTitle: pick(lang, '好的教師，是醫學教育最深的根基', 'Great teachers are the deepest roots of medical education'),
     closingBody: pick(lang, '教師發展中心以系統性培育、教職支持與六大小組協作，陸續協助全院跨職類教師成長，為醫學教育的永續發展扎下深厚根基。', 'Through systematic cultivation, appointment support and six collaborating groups, the Center helps clinical teachers across all professions grow — laying deep roots for the sustainable future of medical education.'),
     contactPerson: pick(lang, '行政專員：陳均茹', 'Administrator: Chun-Ju Chen'),
-    contactExt: pick(lang, '分機 3757', 'Ext. 3757'),
+    contactExt: formatPhoneExt('3757', lang),
     contactPlace: pick(lang, '臺北醫學大學附設醫院 · 教學部 教師發展中心', 'TMU Hospital · Faculty Development Center, Dept. of Medical Education'),
     contactQuote: pick(lang, '成就教師，就是成就每一位未來的醫療人才。', 'To grow a teacher is to grow every future caregiver.'),
     kpis,
