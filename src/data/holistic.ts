@@ -51,7 +51,10 @@ export interface HolisticKpi {
 }
 
 export function holisticKpis(lang: Lang): HolisticKpi[] {
-  const raw = [
+  const raw: Array<
+    | { num: number; label: string; color: string; subtitle?: string }
+    | { display: string; label: string; color: string }
+  > = [
     { num: 142, label: pick(lang, '全人種子教師（累計）', 'Holistic Seed Teachers (total)'), color: '#4f8c7d' },
     {
       num: 87,
@@ -61,14 +64,19 @@ export function holisticKpis(lang: Lang): HolisticKpi[] {
     },
     { num: 11, label: pick(lang, 'MHFA 種子教師', 'MHFA Seed Teachers'), color: '#B69B66' },
     { num: 2, label: pick(lang, 'MHFA 指導員', 'MHFA Instructors'), color: '#5E7A8C' },
+    {
+      display: '?',
+      label: pick(lang, '全人照護教育相關論文', 'Holistic Care Education Papers'),
+      color: '#A87A6B',
+    },
   ];
   return raw.map((k) => ({
-    num: k.num,
-    display: '',
-    isStatic: false,
+    num: 'num' in k ? k.num : 0,
+    display: 'display' in k ? k.display : '',
+    isStatic: 'display' in k,
     label: k.label,
     color: k.color,
-    subtitle: 'subtitle' in k ? (k.subtitle as string) : undefined,
+    subtitle: 'subtitle' in k ? k.subtitle : undefined,
   }));
 }
 
