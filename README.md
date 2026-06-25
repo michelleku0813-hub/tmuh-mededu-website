@@ -102,11 +102,44 @@ src/
 
 ---
 
+## 部署到 Vercel（推薦）
+
+專案已含 `vercel.json`（SPA 路由 fallback）。程式碼在 GitHub：
+
+**https://github.com/michelleku0813-hub/tmuh-mededu-website**
+
+### 第一次部署（約 3 分鐘）
+
+1. 打開 [vercel.com](https://vercel.com)，用 **GitHub 帳號**登入（與上面 repo 同一個帳號）。
+2. 點 **Add New… → Project**。
+3. 在列表中找到 `tmuh-mededu-website`，點 **Import**。
+4. 設定通常不用改（Vercel 會自動偵測 Vite）：
+   - Framework Preset：**Vite**
+   - Build Command：`npm run build`
+   - Output Directory：`dist`
+5. 點 **Deploy**，等約 1–2 分鐘。
+6. 完成後會得到網址，例如 `https://tmuh-mededu-website.vercel.app`，可分享給任何人。
+
+### 之後更新網站
+
+改完程式後在本機執行：
+
+```bash
+git add .
+git commit -m "更新說明"
+git push
+```
+
+Vercel 會自動重新 build 並上線，無需再手動操作。
+
+---
+
 ## 部署注意事項
 
 這是**單頁應用（SPA）**，部署到靜態主機時，需設定「所有路徑都回傳 `index.html`」(SPA fallback)，否則直接打開 `/ebm` 會 404。
 
-- **Vercel / Netlify**：預設已支援，或加一條 rewrite `/* → /index.html`。
+- **Vercel**：專案根目錄的 `vercel.json` 已設定 rewrite。
+- **Netlify**：加一條 rewrite `/* → /index.html`。
 - **Nginx**：`try_files $uri /index.html;`
 - 先 `npm run build`，再把 `dist/` 內容上傳即可。
 
