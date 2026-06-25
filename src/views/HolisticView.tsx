@@ -18,6 +18,7 @@ import { Reveal } from '@/components/common/Reveal';
 import { Eyebrow } from '@/components/common/Eyebrow';
 import { PersonCard } from '@/components/common/PersonCard';
 import { HeroImage } from '@/components/common/HeroImage';
+import { HolisticOutcomesSection } from './holistic/HolisticOutcomesSection';
 
 const TEAL = '#4f8c7d';
 
@@ -186,6 +187,9 @@ export function HolisticView() {
                 <div style={{ fontFamily: "'Noto Sans TC', sans-serif", fontWeight: 600, fontSize: 13.5, color: 'var(--body)', marginTop: 6 }}>
                   {k.label}
                 </div>
+                {k.subtitle && (
+                  <div style={{ fontSize: 11.5, color: 'var(--muted)', marginTop: 4, lineHeight: 1.5 }}>{k.subtitle}</div>
+                )}
               </div>
             ))}
           </Reveal>
@@ -257,6 +261,8 @@ export function HolisticView() {
           ))}
         </div>
       </section>
+
+      <HolisticOutcomesSection />
 
       {/* MHFA / ALGEE */}
       <section id="mhfa" style={{ maxWidth: 1240, margin: '0 auto', padding: '40px 28px' }}>

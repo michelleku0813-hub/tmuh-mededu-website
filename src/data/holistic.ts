@@ -47,21 +47,28 @@ export interface HolisticKpi {
   isStatic: boolean;
   label: string;
   color: string;
+  subtitle?: string;
 }
 
 export function holisticKpis(lang: Lang): HolisticKpi[] {
   const raw = [
-    { num: 2, label: pick(lang, 'MHFA 指導員', 'MHFA Instructors'), color: '#5E7A8C' },
+    { num: 142, label: pick(lang, '全人種子教師（累計）', 'Holistic Seed Teachers (total)'), color: '#4f8c7d' },
+    {
+      num: 87,
+      label: pick(lang, '113 學年種子教師', 'AY113 Seed Teachers'),
+      color: '#6E8A77',
+      subtitle: pick(lang, '醫師 40 · 醫事 14 · 護理 33', 'Physicians 40 · Allied 14 · Nursing 33'),
+    },
     { num: 11, label: pick(lang, 'MHFA 種子教師', 'MHFA Seed Teachers'), color: '#B69B66' },
-    { num: 142, label: pick(lang, '全人種子教師', 'Holistic Seed Teachers'), color: '#4f8c7d' },
-    { display: '?', label: pick(lang, '發表論文', 'Publications'), color: '#A87A6B' },
+    { num: 2, label: pick(lang, 'MHFA 指導員', 'MHFA Instructors'), color: '#5E7A8C' },
   ];
   return raw.map((k) => ({
-    num: 'num' in k ? (k.num as number) : 0,
-    display: 'display' in k ? (k.display as string) : '',
-    isStatic: 'display' in k,
+    num: k.num,
+    display: '',
+    isStatic: false,
     label: k.label,
     color: k.color,
+    subtitle: 'subtitle' in k ? (k.subtitle as string) : undefined,
   }));
 }
 
@@ -130,3 +137,109 @@ export function buildAiEcosystem(lang: Lang) {
     ),
   };
 }
+
+export interface HolisticSymposium {
+  year: number;
+  edition: string;
+  title: string;
+  dates: string;
+  time?: string;
+  attendees?: number;
+  satisfaction?: number;
+}
+
+const HOLISTIC_SYMPOSIUMS_ZH: HolisticSymposium[] = [
+  {
+    year: 2021,
+    edition: '第一屆',
+    title: '靈性關懷國際研討會',
+    dates: '2021/12/04（六）',
+    time: '08:00–17:00',
+    attendees: 382,
+    satisfaction: 4.52,
+  },
+  {
+    year: 2022,
+    edition: '第二屆',
+    title: '全人醫療—靈性關懷國際研討會',
+    dates: '2022/12/03（六）– 12/04（日）',
+    time: '08:00–17:00 / 08:00–12:00',
+    attendees: 916,
+  },
+  {
+    year: 2023,
+    edition: '第一屆',
+    title: '韌性國際研討會',
+    dates: '2023/04/30（日）',
+    time: '10:00–16:00',
+    attendees: 165,
+    satisfaction: 4.88,
+  },
+  {
+    year: 2024,
+    edition: '113 學年',
+    title: '全人照護核心能力研討會',
+    dates: '2024/06/15',
+    time: '08:30–12:30',
+  },
+];
+
+const HOLISTIC_SYMPOSIUMS_EN: HolisticSymposium[] = [
+  {
+    year: 2021,
+    edition: '1st',
+    title: 'International Symposium on Spiritual Care',
+    dates: 'Sat 2021/12/04',
+    time: '08:00–17:00',
+    attendees: 382,
+    satisfaction: 4.52,
+  },
+  {
+    year: 2022,
+    edition: '2nd',
+    title: 'Holistic Medicine — Spiritual Care International Symposium',
+    dates: 'Sat–Sun 2022/12/03–04',
+    time: '08:00–17:00 / 08:00–12:00',
+    attendees: 916,
+  },
+  {
+    year: 2023,
+    edition: '1st',
+    title: 'International Resilience Symposium',
+    dates: 'Sun 2023/04/30',
+    time: '10:00–16:00',
+    attendees: 165,
+    satisfaction: 4.88,
+  },
+  {
+    year: 2024,
+    edition: 'AY113',
+    title: 'Holistic Care Core Competency Symposium',
+    dates: '2024/06/15',
+    time: '08:30–12:30',
+  },
+];
+
+export function buildHolisticOutcomes(lang: Lang) {
+  const isZh = lang === 'zh';
+  return {
+    symposiumEyebrow: pick(lang, 'Symposia', 'Symposia'),
+    symposiumTitle: pick(lang, '全人研討會', 'Holistic Symposia'),
+    symposiumDesc: pick(
+      lang,
+      '教學部主辦之全人照護、靈性關懷與韌性相關國際研討會與論壇。',
+      'International symposia and forums on holistic care, spiritual care and resilience hosted by the Department.',
+    ),
+    symposiums: isZh ? HOLISTIC_SYMPOSIUMS_ZH : HOLISTIC_SYMPOSIUMS_EN,
+    hostLabel: pick(lang, '教學部主辦', 'Hosted by Medical Education'),
+    attendeesLabel: pick(lang, '人', 'attendees'),
+    satisfactionLabel: pick(lang, '滿意度', 'Satisfaction'),
+    trainingEyebrow: pick(lang, 'Faculty Training', 'Faculty Training'),
+    trainingTitle: pick(lang, '113 學年全人照護師培課程', 'AY113 Holistic Care Faculty Training'),
+    trainingDesc: pick(lang, '全人照護種子教師培育與院內師資培訓成果摘要。', 'Summary of seed-teacher cultivation and in-house faculty training outcomes.'),
+    trainingSessions: { num: 7, label: pick(lang, '場訓練', 'Sessions') },
+    trainingParticipants: { num: 1482, label: pick(lang, '人次', 'Participants') },
+    trainingSatisfaction: { num: 4.75, label: pick(lang, '整體滿意度', 'Overall Satisfaction'), suffix: '/5' },
+  };
+}
+

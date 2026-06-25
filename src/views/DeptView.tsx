@@ -17,6 +17,7 @@ import { formatPhoneExt } from '@/utils/phone';
 import { HeroImage } from '@/components/common/HeroImage';
 import { OrgChart } from './dept/OrgChart';
 import { CenterDetailPanel } from './dept/CenterDetailPanel';
+import { DeptAwardsSection } from './dept/DeptAwardsSection';
 
 function OrgToggle({
   variant,
@@ -254,6 +255,8 @@ export function DeptView() {
           ))}
         </div>
       </section>
+
+      <DeptAwardsSection />
 
       {/* ORG CHART */}
       <section id="org" style={{ maxWidth: 1240, margin: '0 auto', padding: '46px 28px' }}>

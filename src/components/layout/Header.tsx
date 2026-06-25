@@ -26,6 +26,7 @@ export function Header() {
         { label: t.navAbout, onClick: go('h-about') },
         { label: t.navMhfa, onClick: go('mhfa') },
         { label: t.navSeed, onClick: go('seed') },
+        { label: isZh ? '研討會與成果' : 'Symposia', onClick: go('h-symposiums') },
         { label: isZh ? '健康台灣' : 'Healthy Taiwan', onClick: go('scope2') },
         { label: isZh ? '最新公告' : 'News', onClick: go('h-news') },
         { label: isZh ? '近期活動' : 'Activities', onClick: go('h-activities') },
@@ -59,6 +60,7 @@ export function Header() {
       navItems = [
         { label: t.navAbout, onClick: go('top') },
         { label: t.navOrg, custom: <NavDropdown /> },
+        { label: isZh ? '品質榮譽' : 'Awards', onClick: go('dept-awards') },
         { label: t.navNews, onClick: go('news') },
         { label: t.navContact, onClick: go('contact') },
       ];
