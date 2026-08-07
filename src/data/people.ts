@@ -1,4 +1,5 @@
 import type { Lang } from '@/i18n';
+import { assetUrl } from '@/utils/asset';
 
 /** Role keys mapped to [zh, en] labels. */
 export const ROLES = {
@@ -14,6 +15,7 @@ export const ROLES = {
   head: ['教學部組長', 'Section Head'],
   spec: ['行政專員', 'Administrative Specialist'],
   pm: ['專案經理', 'Project Manager'],
+  advisor: ['顧問', 'Advisor'],
   ai: ['AI 專家顧問', 'AI Expert Advisor'],
   eng: ['專案工程師', 'Project Engineer'],
 } as const satisfies Record<string, readonly [string, string]>;
@@ -34,6 +36,10 @@ export interface RawPerson {
   /** Main duties (admin specialists). */
   dutyZh?: string;
   dutyEn?: string;
+  /** Hospital extension, digits only. '' while still unknown. */
+  ext?: string;
+  /** Work email. '' while still unknown. */
+  email?: string;
 }
 
 export interface ResolvedPerson {
@@ -51,6 +57,8 @@ export interface ResolvedPerson {
   profileLabel: string;
   duty: string;
   dutyLabel: string;
+  ext: string;
+  email: string;
 }
 
 /** Portraits that need a non-centered crop. */
@@ -77,7 +85,7 @@ function initialsOf(en: string): string {
 
 /** Resolve an image slug to a public asset path. */
 export function resourceSrc(slug: string): string {
-  return slug ? `/assets/${slug}.jpg` : '';
+  return slug ? assetUrl(`assets/${slug}.jpg`) : '';
 }
 
 /** Factory mirroring the original `P(...)` helper. */
@@ -91,8 +99,10 @@ export function person(
   hubId = '',
   dutyZh = '',
   dutyEn = '',
+  ext = '',
+  email = '',
 ): RawPerson {
-  return { zh, en, role, dZh, dEn, slug, hubId, dutyZh, dutyEn };
+  return { zh, en, role, dZh, dEn, slug, hubId, dutyZh, dutyEn, ext, email };
 }
 
 /** Localize a raw person into render-ready data. */
@@ -116,5 +126,7 @@ export function resolvePerson(
     profileLabel: isZh ? '個人學術檔案' : 'Academic Profile',
     duty: isZh ? p.dutyZh ?? '' : p.dutyEn ?? '',
     dutyLabel: isZh ? '主要業務' : 'Main Duties',
+    ext: p.ext ?? '',
+    email: p.email ?? '',
   };
 }

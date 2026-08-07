@@ -5,6 +5,35 @@
 
 ---
 
+## 線上版本
+
+| 版本 | 網址 | 分支 |
+| --- | --- | --- |
+| 第一版 | <https://tmuh-mededu-website.vercel.app> | `main` |
+| **第二版（改版設計）** | **<https://tmuh-mededu-living-tissue.vercel.app>** | `living-tissue` |
+
+**第二版**是在第一版之上重做視覺與互動的設計版本，也是這個分支的內容：新增 WebGL
+背景著色器、平滑捲動與逐行標題進場、章節導覽軌與橫向捲動章節，並把原本的
+`src/views/` 重整為 `src/pages/`。
+
+目前第二版也已依教學部審稿調整：首頁「五大教育中心」併入「教學部一覽」展開卡片、
+行政專員名冊加上分機／信箱、導覽新增「數位教材室」、聯絡區改為地址與服務時間，
+並放大全站字級以利閱讀。手機漢堡選單可上下滑動瀏覽完整項目。
+
+兩版是**各自獨立的 Vercel 專案**，共用同一個 GitHub repo：第一版跟著 `main` 自動部署，
+第二版目前以手動指令從 `living-tissue` 的內容部署（見下方〈第二版的更新方式〉）。
+所以改第二版不會動到第一版，第一版仍是對外的正式站。
+
+### 倉庫與分支
+
+| 項目 | 連結 |
+| --- | --- |
+| GitHub（本 repo） | <https://github.com/michelleku0813-hub/tmuh-mededu-website> |
+| 第二版分支 | [`living-tissue`](https://github.com/michelleku0813-hub/tmuh-mededu-website/tree/living-tissue) |
+| 第二版線上預覽 | <https://tmuh-mededu-living-tissue.vercel.app> |
+
+---
+
 ## 快速開始
 
 ```bash
@@ -22,25 +51,35 @@ npm run preview    # 在本機預覽 build 後的成果
 
 ```
 src/
-├─ main.tsx                  進入點（掛上路由 BrowserRouter + 全域 Provider）
-├─ App.tsx                   依目前網址顯示對應頁面
-├─ context/SiteContext.tsx   全域狀態：語言、主題、目前頁面、網址 ↔ 頁面對應
+├─ main.tsx                  進入點（BrowserRouter + SiteProvider）
+├─ app/
+│  ├─ App.tsx                版面外框與路由表
+│  ├─ site.tsx               全域狀態：語言、主題（皆會記憶在瀏覽器）
+│  ├─ routes.ts              網址 ↔ 中心的對應、舊網址轉址
+│  └─ navigation.ts          跨頁錨點跳轉、換頁捲動歸零
 ├─ i18n/                     ★ 介面文字（中英）：zh.ts / en.ts
 ├─ data/                     ★ 網站內容（最常更新的地方）
 │  ├─ news.ts                公告 & 活動
-│  ├─ people.ts              人員（姓名、職稱、照片檔名）
-│  ├─ centers.ts             各中心基本資料、聯絡方式
-│  ├─ kpis.ts                教學部首頁的數據
-│  ├─ holistic.ts / ebm.ts / facdev.ts   各中心專頁內容
-├─ views/                    各頁面（DeptView 首頁 / HolisticView / EbmView / FacdevView / BuildingView）
-├─ components/
-│  ├─ common/                可重用元件（Eyebrow、PersonCard、KpiCard、SectionHeading…）
-│  └─ layout/                Header、Footer、NavDropdown、背景特效
-├─ hooks/                    捲動揭示、背景粒子效果
-└─ styles/
+│  ├─ people.ts              人員（姓名、職稱、照片、分機、信箱）
+│  ├─ centers.ts             各中心基本資料、聯絡方式、行政團隊名冊
+│  ├─ kpis.ts                教學部首頁的數據（顧問／主治／醫事／五中心）
+│  ├─ deptAwards.ts          SNQ / NHQA 品質榮譽
+│  ├─ holisticPapers.ts      全院全人相關研究論文
+│  └─ holistic.ts / ebm.ts / facdev.ts   各中心專頁內容
+├─ pages/
+│  ├─ Home.tsx + home/       首頁各區塊（Hero、About、組織、公告、一覽、榮譽、聯絡）
+│  ├─ AnnouncementsPage.tsx  完整公告列表與分類篩選
+│  ├─ HonorsPage.tsx         完整 SNQ / NHQA 得獎紀錄
+│  ├─ DigitalMaterialsPage.tsx  數位教材室（內容建置中）
+│  ├─ CenterPage.tsx         依網址分派到對應中心頁
+│  └─ centers/               HolisticPage / EbmPage / FacdevPage / GenericCenterPage
+├─ ui/                       共用元件（Nav、Footer、Icon、Person、Stats、組織圖…）
+├─ motion/                   動效：Lenis 平滑捲動、GSAP 進場、逐行標題、計數器、橫向捲動
+├─ webgl/                    背景「活體組織」著色器（three.js）
+└─ design/
    ├─ tokens.css             ★ 顏色、主題變數（改配色看這裡）
-   ├─ layout.css             ★ 共用版面：eyebrow 樣式、響應式格線
-   └─ global.css             全域基礎樣式與動畫
+   ├─ base.css               ★ 文字級距、共用格線、響應式斷點
+   └─ components.css         元件外觀（導覽列、卡片、表格、組織圖…）
 ```
 
 標 ★ 的是日後最常需要調整的檔案。
@@ -54,6 +93,7 @@ src/
 
 - `date`：發佈日期，格式 `'YYYY-MM-DD'`。網站會**自動由新到舊排序**，並用最新一則顯示「最後更新」。
 - `pinned: true`：讓這則永遠置頂。
+- `category`：公告分類；分類標籤集中在同一檔案的 `ANNOUNCEMENT_CATEGORY_LABELS`。
 - `tag` / `title` / `lines`：都各填 `zh`（中文）與 `en`（英文）。
 - `stat`：左側的數據徽章（選填）。
 
@@ -62,29 +102,35 @@ src/
 
 ### 3. 修改人員
 `src/data/people.ts`（共用）或各中心的 `centers.ts` / `holistic.ts` 等。
-照片放在 `public/`，`person(...)` 第 6、7 個參數是照片檔名（沒有照片會自動顯示姓名縮寫）。
+照片放在 `public/assets/`，檔名為 `<slug>.jpg`；`person(...)` 第 6 個參數就是這個 slug（沒有照片、或照片檔案不存在時，會自動改顯示姓名縮寫）。
+行政專員的**分機**與**信箱**是 `person(...)` 最後兩個參數（可留空字串）；組織面板名冊會顯示在右側。
 
 ### 4. 修改介面文字（按鈕、標題等）
 `src/i18n/zh.ts`（中文）與 `src/i18n/en.ts`（英文）。兩個檔的欄位（key）必須一致，少一個英文 build 時會報錯提醒。
 
-### 5. 調整配色 / 主題
-`src/styles/tokens.css`，修改 CSS 變數即可，明暗兩套都在這裡。
+### 5. 調整全站字級
+根字級在 `src/design/base.css` 的 `html { font-size: …% }`。目前設為 `125%`（約等於內文 20px），全站 rem 會跟著放大。要再大／再小，只改這個百分比即可。
+
+### 6. 調整配色 / 主題
+`src/design/tokens.css`，修改 CSS 變數即可，明暗兩套都在這裡。
+注意：**每個變數在 `:root`（淺色）與 `[data-theme='dark']`（深色）兩區塊都要有**，只改一邊會讓另一個主題壞掉。
+`--field-*` 這幾個變數是背景著色器的顏色，改配色時一併調整才會協調。
 
 ---
 
-## 版面與設計系統（B2）
+## 版面與設計系統
 
 為了「改一次、全站套用」，重複的樣式已收斂成共用資源：
 
-- **區塊小標**：用 `<Eyebrow>` 元件（`src/components/common/Eyebrow.tsx`），而不是每次貼一長串 inline 樣式。
-- **響應式格線**：用 `src/styles/layout.css` 的 class，例如
-  - `grid grid-2` / `grid-3` / `grid-4`：等寬欄，手機自動收合成單欄。
-  - `grid grid-sidebar`：左寬右窄（介紹＋側欄）。
-  - `grid grid-split`：左右各半。
-  - `grid grid-statcard` / `grid-rail`：公告日期欄、ALGEE 字母欄。
-  斷點集中在 `layout.css`，要調整手機/平板的收合行為改這裡即可。
+- **字級**：`display d1`–`d4`（大標）、`lede`、`prose`、`tiny`、`eyebrow`。中文字比英文字視覺上大得多，因此每一級都有 `:lang(zh-Hant)` 的專屬字級，切換語言時會自動套用。全站基準字級見上方〈調整全站字級〉。
+- **格線**：`grid` 搭配 `g2` / `g3` / `g4`（等寬欄）、`g-editorial`（左窄右寬）、`g-aside`、`auto-fit`、`grid-people`（人員卡）。斷點集中在 `design/base.css`。
+- **元件**：`card`、`panel`、`tag`、`stat`、`table`、`btn`、`tlink`、人員名冊 `roster-row`。
+- **中心代表色**：來自 `data/centers.ts` 的 `color`，以 CSS 變數 `--tone` 往下傳，卡片、標籤、圖表會自動跟著變色。
 
----
+### 動效與無障礙
+
+平滑捲動（Lenis）、逐行標題進場、數字計數、橫向捲動章節都由 `src/motion/` 提供。
+**所有動效都會偵測系統的「減少動態效果」設定**：一旦開啟，平滑捲動、進場動畫與背景動畫都會停用，內容直接完整顯示。背景著色器在不支援 WebGL 時也會自動略過，只留下純色背景。
 
 ## 網址與路由（A2）
 
@@ -93,12 +139,18 @@ src/
 | 網址 | 頁面 |
 |------|------|
 | `/` | 教學部首頁 |
-| `/holistic` | 全人照護教育中心 |
-| `/ebm` | 實證醫學中心 |
-| `/facdev` | 教師發展中心 |
-| `/center/:id` | 尚未建置專頁的中心（佔位頁） |
+| `/announcements` | 完整公告與分類篩選 |
+| `/honors` | 完整品質榮譽紀錄 |
+| `/digital-materials` | 數位教材室（建置中） |
+| `/centers/faculty-development` | 教師發展中心 |
+| `/centers/clinical-skills` | 臨床技能中心 |
+| `/centers/evidence-based-medicine` | 實證醫學中心 |
+| `/centers/holistic-care` | 全人照護教育中心 |
+| `/centers/medical-education-research` | 醫學教育研究中心 |
 
-網址 ↔ 頁面的對應集中在 `src/context/SiteContext.tsx`（`VIEW_PATH`、`parsePath`）。切換頁面時瀏覽器分頁標題也會自動更新。
+舊網址（`/holistic`、`/ebm`、`/facdev`、`/center/:id`）會自動轉到新網址，舊的連結與書籤仍然有效。
+
+網址 ↔ 中心的對應集中在 `src/app/routes.ts`。切換頁面時瀏覽器分頁標題也會自動更新。
 
 ---
 
@@ -130,15 +182,71 @@ git commit -m "更新說明"
 git push
 ```
 
-Vercel 會自動重新 build 並上線，無需再手動操作。
+第一版（`main`）到這裡就結束了，Vercel 會自動重新 build 並上線。
+
+### 第二版的更新方式
+
+第二版是另一個 Vercel 專案 `tmuh-mededu-living-tissue`，它的 Production Branch
+仍設定為 `main`，因此 push `living-tissue` 只會產生 Preview 部署。要更新對外網址
+<https://tmuh-mededu-living-tissue.vercel.app>，在 push 之後再執行：
+
+```bash
+vercel --prod
+```
+
+> `vercel --prod` 上傳的是**本機當下的檔案**，不是 GitHub 上的版本，
+> 所以請先 commit 再部署，線上內容才會和版本紀錄一致。
+>
+> 想改成 push 就自動上線，到該專案的 **Settings → Environments → Production →
+> Branch Tracking**，把分支改成 `living-tissue` 即可，之後就不必再手動執行。
+
+---
+
+## 部署到 GitHub Pages
+
+目前線上預覽網址：**https://hsiaoeric.github.io/tmuh-mededu-website/**
+
+這個 repo 的 Pages 設定是「從 `gh-pages` 分支發佈」，更新方式是在本機執行：
+
+```bash
+npm run deploy
+```
+
+會先型別檢查、用正確的網址前綴 build，再把 `dist/` 推到 `gh-pages` 分支。
+**不需要合併到 `main`**，所以可以單獨預覽這個設計版本。
+
+> 另外附了 `.github/workflows/deploy.yml`（改用 GitHub Actions 發佈的版本），
+> 但要先到 **Settings → Pages → Source** 改成 **GitHub Actions** 才會生效，
+> 因此目前設定成只能從 Actions 分頁手動執行，不會自動跑。
+
+### 網址前綴（`VITE_BASE`）
+
+GitHub Pages 的網址是 `https://<帳號>.github.io/<repo>/`，多了一層 `/<repo>/` 前綴，
+因此 build 時要告訴 Vite 這個前綴。這由環境變數 `VITE_BASE` 提供，
+寫在 `package.json` 的 `predeploy`（以及 workflow 的 `env:`）裡：
+
+```jsonc
+"predeploy": "npm run typecheck && VITE_BASE=/tmuh-mededu-website/ vite build"
+```
+
+- **repo 改名時**，這兩處都要一併改。
+- **改用自訂網域**（網站放在根目錄）時，把它設成 `/` 或整段刪掉。
+- 本機或 Vercel 不設這個變數，預設就是 `/`，所以兩邊可以共存、互不影響。
+
+> 在程式裡要指向 `public/` 的檔案時，**請用 `assetUrl()`（`src/utils/asset.ts`）**，
+> 不要直接寫 `/assets/...`。Vite 只會改寫 index.html 與 import 進來的資源，
+> 程式執行時才組出來的字串不會被改寫，寫死斜線開頭在 Pages 上會全部 404。
 
 ---
 
 ## 部署注意事項
 
-這是**單頁應用（SPA）**，部署到靜態主機時，需設定「所有路徑都回傳 `index.html`」(SPA fallback)，否則直接打開 `/ebm` 會 404。
+這是**單頁應用（SPA）**，部署到靜態主機時，需設定「所有路徑都回傳 `index.html`」(SPA fallback)，
+否則直接打開 `/centers/holistic-care` 會 404。
 
 - **Vercel**：專案根目錄的 `vercel.json` 已設定 rewrite。
+- **GitHub Pages**：不能設 rewrite，但會用 `404.html` 回應找不到的路徑；
+  因此 build 時會自動把 `index.html` 複製成 `dist/404.html`（見 `vite.config.ts`），深層連結就能正常運作。
 - **Netlify**：加一條 rewrite `/* → /index.html`。
 - **Nginx**：`try_files $uri /index.html;`
 - 先 `npm run build`，再把 `dist/` 內容上傳即可。
@@ -149,5 +257,7 @@ Vercel 會自動重新 build 並上線，無需再手動操作。
 
 - 建置工具：Vite 5
 - 路由：react-router-dom 7
+- 動效：GSAP（ScrollTrigger / SplitText）+ Lenis
+- 背景：three.js 全螢幕著色器（獨立 chunk，載入首頁後才下載）
 - 語言：TypeScript（`npm run build` 會先做型別檢查，攔截錯字／漏欄位）
 - 無後端，內容皆為前端靜態資料（見 `src/data/`）

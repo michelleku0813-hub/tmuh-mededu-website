@@ -24,7 +24,7 @@ export const HOLISTIC_SEED: RawPerson[] = [
 
 export const HOLISTIC_AI_TEAM: RawPerson[] = [
   person('廖若帆', 'Faith Ruofan Liao', 'pm', '副主任 · 副教授', 'Deputy Director · Assoc. Prof.', 'faith-ruofan-liao', 'faith-ruofan-liao'),
-  person('邵軒磊', 'Hsuan-Lei Shao', 'ai', '教授', 'Professor', 'hsuan-lei-shao'),
+  person('邵軒磊', 'Hsuan-Lei Shao', 'ai', '教授', 'Professor', 'hsuan-lei-shao', 'hsuan-lei-shao'),
   person('Diana Gonzalez', 'Diana Gonzalez', 'eng', 'MD · 範疇二團隊', 'MD · Scope 2 Team'),
 ];
 
@@ -56,15 +56,18 @@ export function holisticKpis(lang: Lang): HolisticKpi[] {
     | { num: number; label: string; color: string; subtitle?: string }
     | { display: string; label: string; color: string }
   > = [
-    { num: 142, label: pick(lang, '全人種子教師（累計）', 'Holistic Seed Teachers (total)'), color: '#4f8c7d' },
     {
       num: 87,
       label: pick(lang, '113 學年種子教師', 'AY113 Seed Teachers'),
       color: '#6E8A77',
       subtitle: pick(lang, '醫師 40 · 醫事 14 · 護理 33', 'Physicians 40 · Allied 14 · Nursing 33'),
     },
-    { num: 11, label: pick(lang, 'MHFA 種子教師', 'MHFA Seed Teachers'), color: '#B69B66' },
-    { num: 2, label: pick(lang, 'MHFA 指導員', 'MHFA Instructors'), color: '#5E7A8C' },
+    { num: 133, label: pick(lang, '全人種子教師（累計）', 'Holistic Seed Teachers (total)'), color: '#4f8c7d' },
+    {
+      display: '2 / 11',
+      label: pick(lang, 'MHFA 指導員／種子教師', 'MHFA Instructors / Seed Teachers'),
+      color: '#5E7A8C',
+    },
     {
       num: HOLISTIC_PAPER_TOTAL,
       label: pick(lang, '全院全人相關研究論文', 'Hospital-Wide Holistic Research'),
@@ -91,10 +94,9 @@ export interface HolisticFeature {
 
 export function holisticFeatures(lang: Lang): HolisticFeature[] {
   return [
-    { iconId: 'brain', title: pick(lang, '心理健康急救', 'Mental Health First Aid'), desc: pick(lang, '引進國際 MHFA 課程，培訓同仁辨識、陪伴並適時轉介需要協助的人。', 'International MHFA training to recognize, accompany and refer those who need help.'), delay: 0 },
-    { iconId: 'sprout', title: pick(lang, '種子教師培育', 'Seed Teacher Cultivation'), desc: pick(lang, '集結護理、醫師、藥劑、社工、心理、語言治療等跨領域人才，將關懷文化向下扎根。', 'Bringing together nursing, medicine, pharmacy, social work, psychology and more to root a culture of care.'), delay: 100 },
-    { iconId: 'network', title: pick(lang, '跨科部協作', 'Cross-Department Collaboration'), desc: pick(lang, '串連臨床各單位與校園資源，打造彼此支持、能即時伸出援手的健康職場。', 'Linking clinical units and campus resources into a supportive, responsive, healthy workplace.'), delay: 200 },
-    { iconId: 'team', title: pick(lang, '全人教育小組', 'Holistic Education Working Group'), desc: pick(lang, '跨越西醫、中醫、牙醫與各醫事職類，組成專責團隊，共同鑽研全人照護教案設計與教學發展，讓全人精神在每個專業領域生根。', 'A dedicated cross-professional team — uniting Western medicine, TCM, dentistry and all allied-health roles — to co-develop holistic-care teaching cases and curricula across every discipline.'), delay: 300 },
+    { iconId: 'sprout', title: pick(lang, '種子教師培育', 'Seed Teacher Cultivation'), desc: pick(lang, '集結護理、醫師、藥劑、社工、心理、語言治療等跨領域人才，將關懷文化向下扎根。', 'Bringing together nursing, medicine, pharmacy, social work, psychology and more to root a culture of care.'), delay: 0 },
+    { iconId: 'network', title: pick(lang, '跨科部協作', 'Cross-Department Collaboration'), desc: pick(lang, '串連臨床各單位與校園資源，打造彼此支持、能即時伸出援手的健康職場。', 'Linking clinical units and campus resources into a supportive, responsive, healthy workplace.'), delay: 100 },
+    { iconId: 'team', title: pick(lang, '全人教育小組', 'Holistic Education Working Group'), desc: pick(lang, '跨越西醫、中醫、牙醫與各醫事職類，組成專責團隊，共同鑽研全人照護教案設計與教學發展，讓全人精神在每個專業領域生根。', 'A dedicated cross-professional team — uniting Western medicine, TCM, dentistry and all allied-health roles — to co-develop holistic-care teaching cases and curricula across every discipline.'), delay: 200 },
   ];
 }
 
@@ -104,12 +106,6 @@ export interface AiFlowStep {
   text: string;
   color: string;
 }
-export interface AiStep {
-  n: string;
-  title: string;
-  text: string;
-}
-
 export function buildAiEcosystem(lang: Lang) {
   return {
     title: pick(lang, 'AI 全人照護教學模擬生態系', 'AI Holistic-Care Teaching Simulation Ecosystem'),
@@ -119,19 +115,12 @@ export function buildAiEcosystem(lang: Lang) {
       'The core is not a single tool but a teaching-simulation ecosystem for repeated practice, instant feedback and an accumulating case library — connecting AI patients, AI-authored cases, tablet & VR simulation, holistic learning feedback and a Line AI ChatBot assistant.',
     ),
     problemsTitle: pick(lang, '生態系要解決什麼問題？', 'What does the ecosystem solve?'),
-    teamLabel: pick(lang, '範疇二团隊', 'Scope 2 Team'),
+    teamLabel: pick(lang, '健康台灣深耕計劃範疇二團隊', 'Healthy Taiwan Deep Cultivation Program · Scope 2 Team'),
     flow: [
       { role: pick(lang, '教師端', 'Faculty'), title: pick(lang, '教案 AI 化', 'AI-authored cases'), text: pick(lang, '把全人照護目標、臨床任務與討論問題轉成可互動的情境教案。', 'Turn holistic-care goals, clinical tasks and discussion prompts into interactive case scenarios.'), color: '#4f8c7d' },
       { role: pick(lang, '情境內容', 'Scenario'), title: pick(lang, '全人臨床情境', 'Whole-person clinical context'), text: pick(lang, '以醫學、人文、心理、倫理與照護脈絡設計案例。', 'Cases designed across medical, humanistic, psychological, ethical and care contexts.'), color: '#6E8A77' },
-      { role: pick(lang, '學生端', 'Student'), title: pick(lang, '平板與 VR 模擬練習', 'Tablet & VR simulation'), text: pick(lang, '學生透過問診、判斷、醫令與治療計畫練習臨床推理。', 'Students practice clinical reasoning through history-taking, judgment, orders and treatment plans.'), color: '#5E7A8C' },
-      { role: pick(lang, '回饋端', 'Feedback'), title: pick(lang, '即時回饋與 Line AI ChatBot', 'Instant feedback & Line AI ChatBot'), text: pick(lang, '提供學習歷程回饋與全人臨床隨身助教，支援課後延伸學習。', 'Learning-process feedback plus an on-the-go holistic clinical assistant for after-class study.'), color: '#B69B66' },
+      { role: pick(lang, '回饋端', 'Feedback'), title: pick(lang, 'AI即時回饋', 'AI Instant Feedback'), text: pick(lang, '提供學習歷程回饋與全人臨床隨身助教，支援課後延伸學習。', 'Learning-process feedback plus an on-the-go holistic clinical assistant for after-class study.'), color: '#B69B66' },
     ] as AiFlowStep[],
-    steps: [
-      { n: '01', title: pick(lang, '情境設計', 'Scenario design'), text: pick(lang, '教師將全人照護能力指標轉為臨床任務與討論問題', 'Faculty translate holistic-care competencies into clinical tasks and prompts') },
-      { n: '02', title: pick(lang, 'AI 病人互動', 'AI patient interaction'), text: pick(lang, '學生與 AI 病人進行問診、診斷說明與治療溝通', 'Students conduct history-taking, diagnosis and treatment communication with an AI patient') },
-      { n: '03', title: pick(lang, '模擬練習導入', 'Simulation practice'), text: pick(lang, '結合平板、VR 與小組討論，讓課程更貼近臨床現場', 'Tablet, VR and group discussion bring courses closer to the clinical floor') },
-      { n: '04', title: pick(lang, '回饋與延伸', 'Feedback & extension'), text: pick(lang, '以即時回饋與 ChatBot 協助學生整理學習成效', 'Instant feedback and the ChatBot help students consolidate learning outcomes') },
-    ] as AiStep[],
     problems: pick(
       lang,
       [
@@ -175,6 +164,7 @@ const HOLISTIC_SYMPOSIUMS_ZH: HolisticSymposium[] = [
     dates: '2022/12/03（六）– 12/04（日）',
     time: '08:00–17:00 / 08:00–12:00',
     attendees: 916,
+    satisfaction: 4.75,
   },
   {
     year: 2023,
@@ -211,6 +201,7 @@ const HOLISTIC_SYMPOSIUMS_EN: HolisticSymposium[] = [
     dates: 'Sat–Sun 2022/12/03–04',
     time: '08:00–17:00 / 08:00–12:00',
     attendees: 916,
+    satisfaction: 4.75,
   },
   {
     year: 2023,
@@ -234,11 +225,11 @@ export function buildHolisticOutcomes(lang: Lang) {
   const isZh = lang === 'zh';
   return {
     symposiumEyebrow: pick(lang, 'Symposia', 'Symposia'),
-    symposiumTitle: pick(lang, '全人研討會', 'Holistic Symposia'),
+    symposiumTitle: pick(lang, '全人研討會＆論壇', 'Holistic Symposia & Forums'),
     symposiumDesc: pick(
       lang,
-      '教學部主辦之全人照護、靈性關懷與韌性相關國際研討會與論壇。',
-      'International symposia and forums on holistic care, spiritual care and resilience hosted by the Department.',
+      '教學部主辦之全人照護、靈性關懷與韌性相關研討會與論壇；活動規模依年度主題與形式調整，參與人數不宜直接跨年度比較。',
+      'Department-hosted symposia and forums on holistic care, spiritual care and resilience. Scale varies with each year’s topic and format, so attendance is not directly comparable across years.',
     ),
     symposiums: isZh ? HOLISTIC_SYMPOSIUMS_ZH : HOLISTIC_SYMPOSIUMS_EN,
     hostLabel: pick(lang, '教學部主辦', 'Hosted by Medical Education'),
@@ -252,4 +243,3 @@ export function buildHolisticOutcomes(lang: Lang) {
     trainingSatisfaction: { num: 4.75, label: pick(lang, '整體滿意度', 'Overall Satisfaction'), suffix: '/5' },
   };
 }
-
