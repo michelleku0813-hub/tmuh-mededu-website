@@ -26,7 +26,7 @@ const MEMBER_GROUPS: Record<string, RawPerson[]> = {
   ],
   'Teaching Allied Health': [
     person('王莉萱', 'Li-Hsuan Wang', 'lead', '藥劑 · 教授<br>藥劑部', 'Pharmacy · Prof.<br>Pharmacy', 'li-hsuan-wang'),
-    person('范芳郡', 'Fang-Chun Fan', 'lead', '放射<br>影像醫學部', 'Radiology<br>Medical Imaging', 'fang-chun-fan'),
+    person('范芳郡', 'Fang-Chun Fan', 'lead', '放射 · 講師<br>影像醫學部', 'Radiology · Lecturer<br>Medical Imaging', 'fang-chun-fan'),
     person('向慧芬', 'Hui-Fen Hsiang', 'lead', '', ''),
     person('鄭憲霖', 'Hsien-Lin Cheng', 'lead', '', ''),
   ],

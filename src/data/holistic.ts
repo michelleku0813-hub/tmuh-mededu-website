@@ -13,7 +13,7 @@ export const HOLISTIC_SEED: RawPerson[] = [
   person('吳政誠', 'Jeng-Cheng Wu', 'seed', '西醫 · 助理教授<br>泌尿科', 'Physician · Asst. Prof.<br>Urology', 'jeng-cheng-wu'),
   person('彭思媛', 'Szu-Yuan Peng', 'seed', '社工<br>社工室', 'Social Work<br>Social Work Office'),
   person('王莉萱', 'Li-Hsuan Wang', 'seed', '藥劑 · 教授<br>藥劑部', 'Pharmacy · Prof.<br>Pharmacy', 'li-hsuan-wang'),
-  person('范芳郡', 'Fang-Chun Fan', 'seed', '放射<br>影像醫學部', 'Radiology<br>Medical Imaging', 'fang-chun-fan'),
+  person('范芳郡', 'Fang-Chun Fan', 'seed', '放射 · 講師<br>影像醫學部', 'Radiology · Lecturer<br>Medical Imaging', 'fang-chun-fan'),
   person('曹念萱', 'Nien-Hsuan Tsao', 'seed', '護理<br>護理部', 'Nursing<br>Nursing Dept.', 'nien-hsuan-tsao'),
   person('曲天尚', 'Tien-Shang Chu', 'seed', '護理<br>護理部', 'Nursing<br>Nursing Dept.', 'tien-shang-chu'),
   person('高倩琪', 'Chien-Chi Kao', 'seed', '關懷師<br>員工關懷中心', 'Chaplain<br>Staff Care'),
