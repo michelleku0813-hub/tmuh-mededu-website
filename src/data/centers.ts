@@ -354,7 +354,7 @@ export const CENTERS: Center[] = [
       // to be confirmed by the department.
       person('楊明芳', 'Ming-Fang Yang', 'spec', 'TMS、新人訓', 'TMS · Orientation', '', '', 'TMS・新人訓', 'TMS · Orientation', '3770', '874035@h.tmu.edu.tw'),
       person('羅翊芳', 'Yi-Fang Lo', 'spec', '職類、教學門診', 'Professions · Teaching Clinics', '', '', '職類・教學門診', 'Professions · Teaching Clinics', '3758', '225102@h.tmu.edu.tw'),
-      person('曾牧雲', 'Mu-Yun Tseng', 'spec', '實習醫學生', 'Clerkships', '', '', '實習醫學生', 'Clerkships', '', ''),
+      person('曾牧雲', 'Mu-Yun Tseng', 'spec', '實習醫學生', 'Clerkships', '', '', '實習醫學生', 'Clerkships', '3753', '255093@h.tmu.edu.tw'),
       person('李珮暄', 'Pei-Hsuan Li', 'spec', '住院醫師、PEC、CCC', 'Residents · PEC · CCC', '', '', '住院醫師・PEC・CCC', 'Residents · PEC · CCC', '3751', '245030@h.tmu.edu.tw'),
       person('張筱雯', 'Hsiao-Wen Chang', 'spec', 'PGY', 'PGY', '', '', 'PGY', 'PGY', '3751', '225027@h.tmu.edu.tw'),
       person('陳均茹', 'Chun-Ju Chen', 'spec', '教發、大人提、教職', 'Faculty Dev. · Grants · Appointments', '', '', '教發・大人提・教職', 'Faculty Dev. · Grants · Appointments', '3757', '235026@h.tmu.edu.tw'),
@@ -363,7 +363,7 @@ export const CENTERS: Center[] = [
       person('張家銘', 'Chia-Ming Chang', 'spec', '臨技、OSCE', 'Clinical Skills · OSCE', '', '', '臨技・OSCE', 'Clinical Skills · OSCE', '3772', '245060@h.tmu.edu.tw'),
       person('陳麗玉', 'Li-Yu Chen', 'spec', '醫學教育研究中心', 'Research in Medical Education', '', '', '醫學教育研究中心', 'Research in Medical Education', '3760', '255147@h.tmu.edu.tw'),
       person('張淑慧', 'Shu-Hui Chang', 'spec', '美術、平面設計', 'Art · Graphic Design', '', '', '美術・平面設計', 'Art · Graphic Design', '3983', '115126@h.tmu.edu.tw'),
-      person('高偉劭', 'Wei-Shao Kao', 'spec', '影音', 'Audiovisual', '', '', '影音', 'Audiovisual', '', ''),
+      person('高暐劭', 'Wei-Shao Kao', 'spec', '影音', 'Audiovisual', '', '', '影音', 'Audiovisual', '3983', '255027@h.tmu.edu.tw'),
     ],
   },
 ];
